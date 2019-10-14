@@ -184,14 +184,6 @@ export default function Nav({ history, navTitle }) {
       <AppBar position="fixed">
         <Container>
         <Toolbar>
-          <IconButton
-            edge="start"
-            className={classes.menuButton}
-            color="inherit"
-            aria-label="open drawer"
-          >
-            <MenuIcon />
-          </IconButton>
           <Typography className={classes.title} variant="h6" noWrap>
             HDB Recipes • {navTitle}
           </Typography>
