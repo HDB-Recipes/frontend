@@ -14,8 +14,9 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 import MailIcon from '@material-ui/icons/Mail';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
-import { Container } from '@material-ui/core';
+import { Container, Button, TextField, DialogContentText, DialogContent, DialogTitle, Dialog, DialogActions } from '@material-ui/core';
 import axiosWithAuth from './axiosWithAuth'
+import { MdAddCircle } from "react-icons/md";
 
 const useStyles = makeStyles(theme => ({
   grow: {
@@ -121,6 +122,16 @@ export default function Nav({ history, navTitle }) {
     history.push('/')
   }
 
+  const [open, setOpen] = React.useState(false);
+
+    const handleClickOpen = () => {
+      setOpen(true);
+    };
+  
+    const handleClose = () => {
+      setOpen(false);
+    };
+
   const menuId = 'primary-search-account-menu';
   const renderMenu = (
     <Menu
@@ -176,6 +187,19 @@ export default function Nav({ history, navTitle }) {
         </IconButton>
         <p>{user ? user.username : null}</p>
       </MenuItem>
+
+      
+      <MenuItem onClick={handleClickOpen}>
+        <IconButton
+          aria-label="account of current user"
+          aria-controls="primary-search-account-menu"
+          aria-haspopup="true"
+          color="inherit"
+        >
+          <MdAddCircle />
+        </IconButton>
+        <p>Add Recipe</p>
+      </MenuItem>
     </Menu>
   );
 
@@ -212,6 +236,40 @@ export default function Nav({ history, navTitle }) {
                 <NotificationsIcon />
               </Badge>
             </IconButton> */}
+
+            {/* Modal */}
+            <div style={{marginTop: 6}}>
+      <Button variant="outlined" color="secondary" onClick={handleClickOpen}>
+        Add Recipe
+      </Button>
+      <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
+        <DialogTitle id="form-dialog-title">Subscribe</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            To subscribe to this website, please enter your email address here. We will send updates
+            occasionally.
+          </DialogContentText>
+          <TextField
+            autoFocus
+            margin="dense"
+            id="name"
+            label="Email Address"
+            type="email"
+            fullWidth
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose} color="primary">
+            Cancel
+          </Button>
+          <Button onClick={handleClose} color="primary">
+            Subscribe
+          </Button>
+        </DialogActions>
+      </Dialog>
+    </div>
+            {/* End Modal */}
+
             <IconButton
               edge="end"
               aria-label="account of current user"
